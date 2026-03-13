@@ -1,0 +1,152 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+[CreateAssetMenu(menuName = "PlayersInputReader")]
+public class InputReaderScript : ScriptableObject, GameInputActions.IFirstPlayerActions, GameInputActions.ISecondPlayerActions, GameInputActions.IThirdPlayerActions, GameInputActions.IFourPlayerActions, GameInputActions.IUIActions
+{
+    private GameInputActions _playersInputAction;
+
+    #region Enable/Disable
+    private void OnEnable()
+    {
+        if (_playersInputAction == null)
+        {
+            _playersInputAction = new GameInputActions();
+
+            _playersInputAction.FirstPlayer.SetCallbacks(this);
+            _playersInputAction.SecondPlayer.SetCallbacks(this);
+            _playersInputAction.ThirdPlayer.SetCallbacks(this);
+            _playersInputAction.FourPlayer.SetCallbacks(this);
+
+            EnableAllGameplayInput();
+        }
+    }
+
+    private void OnDisable()
+    {
+        DisableAllInput();
+    }
+
+    private void DisableAllInput()
+    {
+        _playersInputAction.FirstPlayer.Disable();
+        _playersInputAction.SecondPlayer.Disable();
+        _playersInputAction.ThirdPlayer.Disable();
+        _playersInputAction.FourPlayer.Disable();
+
+        _playersInputAction.UI.Disable();
+    }
+
+    private void EnableAllGameplayInput()
+    {
+        _playersInputAction.FirstPlayer.Enable(); 
+        _playersInputAction.SecondPlayer.Enable();
+        _playersInputAction.ThirdPlayer.Enable();
+        _playersInputAction.FourPlayer.Enable();
+
+        _playersInputAction.UI.Disable();
+    }
+    #endregion
+
+    public event Action<Vector2> fp_MoveEvent;
+    public event Action<Vector2> sp_MoveEvent;
+    public event Action<Vector2> tp_MoveEvent;
+    public event Action<Vector2> fop_MoveEvent;
+
+    public event Action fp_takeUpEvent;
+    public event Action sp_takeUpEvent;
+    public event Action tp_takeUpEvent;
+    public event Action fop_takeUpEvent;
+
+    public event Action fp_LeftOutEvent;
+    public event Action sp_LeftOutEvent;
+    public event Action tp_LeftOutEvent;
+    public event Action fop_LeftOutEvent;
+
+    #region First Player
+    public void OnFpMove(InputAction.CallbackContext context)
+    {
+        Debug.Log($"Red - Phase.:{context.phase}, Value.:{context.ReadValue<Vector2>()}");
+        fp_MoveEvent?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    public void OnFpTakeUp(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnFpLeftOut(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+    #endregion
+
+    #region Second Player
+    public void OnSpMove(InputAction.CallbackContext context)
+    {
+        Debug.Log($"Blue - Phase.:{context.phase}, Value.:{context.ReadValue<Vector2>()}");
+        sp_MoveEvent?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    public void OnSpTakeUp(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnSpLeftOut(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+    #endregion
+
+    #region Third Player
+    public void OnTpMove(InputAction.CallbackContext context)
+    {
+        Debug.Log($"Green - Phase.:{context.phase}, Value.:{context.ReadValue<Vector2>()}");
+        tp_MoveEvent?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    public void OnTpTakeUp(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnTpLeftOut(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+    #endregion
+
+    #region Fourth player
+    public void OnFopMove(InputAction.CallbackContext context)
+    {
+        Debug.Log($"Yellow - Phase.:{context.phase}, Value.:{context.ReadValue<Vector2>()}");
+        fop_MoveEvent?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    public void OnFopTakeUp(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnFopLeftOut(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+    #endregion
+
+    #region UI Input
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnResume(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+    #endregion
+}
