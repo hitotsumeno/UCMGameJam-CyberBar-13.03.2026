@@ -135,7 +135,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""8e2543bd-a952-4624-b6a3-738e2e011fa7"",
-                    ""path"": ""<HID::DragonRise Inc.   Generic   USB  Joystick  >/stick/up"",
+                    ""path"": ""<Joystick>{Joystick1}/stick/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -146,7 +146,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""5b54f5bf-8fbf-4ff3-9b73-54b364b018c8"",
-                    ""path"": ""<Joystick>/stick/down"",
+                    ""path"": ""<Joystick>{Joystick1}/stick/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -157,7 +157,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""5cbca437-ef65-41f0-bde5-4b839e9bd6b7"",
-                    ""path"": ""<Joystick>/stick/left"",
+                    ""path"": ""<Joystick>{Joystick1}/stick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -168,7 +168,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""ab867bb2-f9a8-4665-a025-89d3f5029f99"",
-                    ""path"": ""<Joystick>/stick/right"",
+                    ""path"": ""<Joystick>{Joystick1}/stick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -179,7 +179,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2d7ca732-9ecc-4f43-90cf-c0f62a276061"",
-                    ""path"": ""<Joystick>/trigger"",
+                    ""path"": ""<Joystick>{Joystick1}/trigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
