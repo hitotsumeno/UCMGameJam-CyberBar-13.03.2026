@@ -22,7 +22,7 @@ public class SecondPlayerTakeLeft : PlayerTakeLeftBase
         }
         else
         {
-            Drop();
+            //Drop();
         }
     }
 

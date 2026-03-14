@@ -99,12 +99,12 @@ public class InputReaderScript : ScriptableObject, GameInputActions.IFirstPlayer
 
     public void OnFpTakeUp(InputAction.CallbackContext context)
     {
-        throw new NotImplementedException();
+        fp_takeUpEvent?.Invoke();
     }
 
     public void OnFpLeftOut(InputAction.CallbackContext context)
     {
-        throw new NotImplementedException();
+        fp_LeftOutEvent?.Invoke();
     }
     #endregion
 
@@ -117,12 +117,15 @@ public class InputReaderScript : ScriptableObject, GameInputActions.IFirstPlayer
 
     public void OnSpTakeUp(InputAction.CallbackContext context)
     {
-        throw new NotImplementedException();
+        if (context.phase == InputActionPhase.Started)
+        {
+            sp_takeUpEvent?.Invoke();
+        }
     }
 
     public void OnSpLeftOut(InputAction.CallbackContext context)
     {
-        throw new NotImplementedException();
+        sp_LeftOutEvent?.Invoke();
     }
     #endregion
 
@@ -135,12 +138,12 @@ public class InputReaderScript : ScriptableObject, GameInputActions.IFirstPlayer
 
     public void OnTpTakeUp(InputAction.CallbackContext context)
     {
-        throw new NotImplementedException();
+        tp_takeUpEvent?.Invoke();
     }
 
     public void OnTpLeftOut(InputAction.CallbackContext context)
     {
-        throw new NotImplementedException();
+        tp_LeftOutEvent?.Invoke();
     }
     #endregion
 
@@ -153,12 +156,12 @@ public class InputReaderScript : ScriptableObject, GameInputActions.IFirstPlayer
 
     public void OnFopTakeUp(InputAction.CallbackContext context)
     {
-        throw new NotImplementedException();
+        fop_takeUpEvent?.Invoke();
     }
 
     public void OnFopLeftOut(InputAction.CallbackContext context)
     {
-        throw new NotImplementedException();
+        fop_LeftOutEvent?.Invoke();
     }
     #endregion
 

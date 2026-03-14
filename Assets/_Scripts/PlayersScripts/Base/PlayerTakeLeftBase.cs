@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerTakeLeftBase : MonoBehaviour
 {
+    private PlayerCrafting _crafting;
+
     [Header("Pickup Settings")]
     [SerializeField] private Transform _holdPoint;
     [SerializeField] private string _pickupTag = "Pickup";
@@ -15,14 +17,16 @@ public class PlayerTakeLeftBase : MonoBehaviour
     // Ensure a valid hold point exists at runtime (Reset only runs in editor when adding/resetting component)
     private void Awake()
     {
+
         if (_holdPoint == null)
         {
             var hp = new GameObject("HoldPoint");
             hp.transform.SetParent(transform, false);
-            hp.transform.localPosition = Vector3.right * 0.5f;
+            hp.transform.localPosition = Vector3.right * .5f;
             _holdPoint = hp.transform;
         }
-
+        
+        _crafting = GetComponent<PlayerCrafting>();
     }
     private void HandlePickupInput()
     {
@@ -43,6 +47,12 @@ public class PlayerTakeLeftBase : MonoBehaviour
     {
         if (item == null)
             return;
+
+        if (_crafting != null)
+        {
+            _crafting.TryPickupAndCraft(item);
+            if (_heldItem != item) return;
+        }
 
         if (_holdPoint == null)
         {

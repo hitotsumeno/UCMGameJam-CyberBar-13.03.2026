@@ -325,8 +325,30 @@
                 },
                 {
                     "name": "",
+                    "id": "dc4078a5-3512-4f1c-afed-56b3e2032d3d",
+                    "path": "<Keyboard>/rightShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "spTakeUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f2df23a0-0de6-4041-a44f-377c3a4f546b",
                     "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "spLeftOut",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55c09097-5d2f-47e6-8c10-021269e5376e",
+                    "path": "<Keyboard>/slash",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
