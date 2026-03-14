@@ -1,11 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 
 [CreateAssetMenu(menuName = "PlayersInputReader")]
-public class InputReaderScript : ScriptableObject, GameInputActions.IFirstPlayerActions, GameInputActions.ISecondPlayerActions, GameInputActions.IThirdPlayerActions, GameInputActions.IFourPlayerActions, GameInputActions.IUIActions
+public class InputReaderScript : ScriptableObject, GameInputActions.IFirstPlayerActions,GameInputActions.ISecondPlayerActions, GameInputActions.IThirdPlayerActions, GameInputActions.IFourPlayerActions, GameInputActions.IUIActions
 {
     private GameInputActions _playersInputAction;
 
@@ -14,14 +13,33 @@ public class InputReaderScript : ScriptableObject, GameInputActions.IFirstPlayer
     {
         if (_playersInputAction == null)
         {
+            var joysticks = Joystick.all;
+
             _playersInputAction = new GameInputActions();
 
             _playersInputAction.FirstPlayer.SetCallbacks(this);
             _playersInputAction.SecondPlayer.SetCallbacks(this);
             _playersInputAction.ThirdPlayer.SetCallbacks(this);
-            _playersInputAction.FourPlayer.SetCallbacks(this);
+            _playersInputAction.FourPlayer.SetCallbacks(this); 
+
+            AssingDevices();
 
             EnableAllGameplayInput();
+        }
+    }
+
+    private void AssingDevices()
+    {
+        var joysticks = Joystick.all;
+
+        _playersInputAction.FirstPlayer.Get().devices = new ReadOnlyArray<InputDevice>(new[] { joysticks[0] });
+        _playersInputAction.SecondPlayer.Get().devices = new ReadOnlyArray<InputDevice>(new[] { joysticks[1] });
+        _playersInputAction.ThirdPlayer.Get().devices = new ReadOnlyArray<InputDevice>(new[] { joysticks[2] });
+        _playersInputAction.FourPlayer.Get().devices = new ReadOnlyArray<InputDevice>(new[] { joysticks[3] });
+
+        foreach (var device in devices)
+        { 
+           Debug.Log(device.deviceId + " : " + device.displayName);
         }
     }
 
