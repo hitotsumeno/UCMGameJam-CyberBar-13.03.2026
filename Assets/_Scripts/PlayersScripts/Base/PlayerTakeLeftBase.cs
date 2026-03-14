@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerTakeLeft : MonoBehaviour
+public class PlayerTakeLeftBase : MonoBehaviour
 {
     [Header("Pickup Settings")]
     [SerializeField] private Transform _holdPoint;
     [SerializeField] private string _pickupTag = "Pickup";
-    [SerializeField] private KeyCode _pickupKey = KeyCode.E;
     [SerializeField] private float _dropPushForce = 2f;
 
-    private GameObject _nearbyPickup;
-    private GameObject _heldItem;
+    protected GameObject _nearbyPickup;
+    protected GameObject _heldItem;
 
     // Ensure a valid hold point exists at runtime (Reset only runs in editor when adding/resetting component)
     private void Awake()
@@ -23,16 +22,8 @@ public class PlayerTakeLeft : MonoBehaviour
             hp.transform.localPosition = Vector3.right * 0.5f;
             _holdPoint = hp.transform;
         }
-    }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(_pickupKey))
-        {
-            HandlePickupInput();
-        }
     }
-
     private void HandlePickupInput()
     {
         if (_heldItem == null)
@@ -48,7 +39,7 @@ public class PlayerTakeLeft : MonoBehaviour
         }
     }
 
-    private void PickUp(GameObject item)
+    protected void PickUp(GameObject item)
     {
         if (item == null)
             return;
@@ -79,7 +70,7 @@ public class PlayerTakeLeft : MonoBehaviour
         Debug.Log($"Picked up {_heldItem.name}");
     }
 
-    private void Drop()
+    protected void Drop()
     {
         if (_heldItem == null)
             return;
