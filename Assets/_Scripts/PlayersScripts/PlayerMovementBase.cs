@@ -38,7 +38,7 @@ public class PlayerMovementBase : MonoBehaviour
             targetVelocity = moveDirections * MoveStats.maxSpeed;
 
             _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
-            _rb.velocity = _moveVelocity.normalized;
+            gameObject.transform.position += new Vector3(_moveVelocity.x, _moveVelocity.y, 0);
         }
 
         if (moveDirections == Vector2.zero)
