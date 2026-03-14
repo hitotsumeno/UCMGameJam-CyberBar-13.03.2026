@@ -32,14 +32,20 @@ public class InputReaderScript : ScriptableObject, GameInputActions.IFirstPlayer
     {
         var joysticks = Joystick.all;
 
+        if (joysticks.Count < 4)
+        {
+            Debug.LogWarning("Less than 4 joysticks connected!");
+            return;
+        }
+
         _playersInputAction.FirstPlayer.Get().devices = new ReadOnlyArray<InputDevice>(new[] { joysticks[0] });
         _playersInputAction.SecondPlayer.Get().devices = new ReadOnlyArray<InputDevice>(new[] { joysticks[1] });
         _playersInputAction.ThirdPlayer.Get().devices = new ReadOnlyArray<InputDevice>(new[] { joysticks[2] });
         _playersInputAction.FourPlayer.Get().devices = new ReadOnlyArray<InputDevice>(new[] { joysticks[3] });
 
-        foreach (var device in devices)
+        foreach (var joystick in joysticks)
         { 
-           Debug.Log(device.deviceId + " : " + device.displayName);
+           Debug.Log(joystick.deviceId + " : " + joystick.displayName);
         }
     }
 
