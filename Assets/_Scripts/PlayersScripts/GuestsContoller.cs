@@ -43,7 +43,7 @@ public class GuestsContoller : MonoBehaviour
         if (!IsAcceptedTag(other.tag))
             return;
 
-        int tableIndex = GetFirstFreeTableIndex();
+        int tableIndex = GetRandomFreeTableIndex();
         if (tableIndex == -1)
         {
             Debug.Log("GuestsController: No free tables available.");
@@ -76,12 +76,19 @@ public class GuestsContoller : MonoBehaviour
         return false;
     }
 
-    private int GetFirstFreeTableIndex()
+    // return a random free table index, or -1 if none
+    private int GetRandomFreeTableIndex()
     {
+        var free = new List<int>();
         for (int i = 0; i < _occupied.Length; i++)
             if (!_occupied[i])
-                return i;
-        return -1;
+                free.Add(i);
+
+        if (free.Count == 0)
+            return -1;
+
+        int pick = free[Random.Range(0, free.Count)];
+        return pick;
     }
 
     private void SeatGuestAtTable(GameObject guest, int tableIndex)
@@ -107,6 +114,39 @@ public class GuestsContoller : MonoBehaviour
         _occupied[tableIndex] = true;
 
         Debug.Log($"GuestsController: Seated {guest.name} at table #{tableIndex}");
+    }
+
+    /// <summary>
+    /// Public helper to seat a guest programmatically.
+    /// Returns true if the guest was assigned a table.
+    /// </summary>
+    public bool TrySeatGuest(GameObject guest)
+    {
+        if (guest == null) return false;
+
+        int tableIndex = GetRandomFreeTableIndex();
+        if (tableIndex == -1)
+        {
+            Debug.Log("GuestsController: No free tables available.");
+            return false;
+        }
+
+        // If teleporting is disabled, prefer telling GuestNPC to walk to the table
+        if (!_teleportOnSeat)
+        {
+            var npc = guest.GetComponent<GuestNPC>();
+            if (npc != null)
+            {
+                npc.MoveToTable(_tables[tableIndex], _seatOffset, _parentToTable);
+                _occupied[tableIndex] = true;
+                Debug.Log($"GuestsController: Instructed {guest.name} to move to table #{tableIndex}");
+                return true;
+            }
+        }
+
+        // Default: teleport and seat
+        SeatGuestAtTable(guest, tableIndex);
+        return true;
     }
 
     // Call this to free a table (e.g. when guest leaves). You can call this from guest logic.
